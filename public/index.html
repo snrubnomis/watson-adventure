@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="watson-adventure">
+
+  <head>
+    <title>Watson Adventure</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="stylesheets/style.css">
+
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>
+    <script src="./client-app.js"></script>
+  </head>
+
+  <body ng-controller="ConversationController as vm">
+    <div class="user-input">
+      <form name="talkToWatson" ng-submit="vm.talkToWatson(vm.userInput); vm.userInput = '';">
+        <input type="text" ng-model="vm.userInput" ng-disabled="vm.finished" autofocus placeholder="What do you want to do?" aria-label="Enter your command here"/>
+      </form>
+    </div>
+    <div class="conversation-container">
+      <ul class="conversation" id="conversation">
+        <li class="watson typing" ng-show="vm.watsonTyping">
+          ...
+        </li>
+        <li class="{{step.who}}" ng-repeat="step in vm.conversation" id="{{step.id}}">
+          <ul>
+            <li ng-repeat="text in step.text">{{text}}</li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+    <div class="intro">
+      <p>This is a very short adventure game written using IBM Watson Conversation.</p>
+    </div>
+  </body>
+
+</html>
